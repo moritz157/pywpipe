@@ -8,7 +8,7 @@ API
 =====
 
     wpipe.Server(name, mode, *, maxclients = 5, maxmessagesz = 4096, maxtime = 100):
-    wpipe.Client(name, mode, *, maxmessagesz = 4096)
+    wpipe.Client(name, mode, *, maxmessagesz = 4096, server = '.')
 
 
 

@@ -180,12 +180,13 @@ class ServerClient:
         hk32['CloseHandle'](ctypes_handle(self.handle))
 
 class Client(Base):
-    def __init__(self, name, mode, *, maxmessagesz = 4096):
+    def __init__(self, name, mode, *, maxmessagesz = 4096, server = '.'):
         self.mode = mode
         self.maxmessagesz = maxmessagesz
         self.name = name
+        self.server = server
         self.handle = hk32['CreateFileA'](
-            ctypes.c_char_p(b'\\\\.\\pipe\\' + bytes(name, 'utf8')),
+            ctypes.c_char_p(b'\\\\'+server+'\\pipe\\' + bytes(name, 'utf8')),
             ctypes.c_uint(GENERIC_READ | GENERIC_WRITE),
             0,                      # no sharing
             0,                      # default security
@@ -236,6 +237,8 @@ class Client(Base):
 
     def read(self):
         return self.client.read()
+
+
 
     def write(self, message):
         if not self.alive:
