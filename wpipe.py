@@ -186,7 +186,7 @@ class Client(Base):
         self.name = name
         self.server = server
         self.handle = hk32['CreateFileA'](
-            ctypes.c_char_p(b'\\\\'+server+'\\pipe\\' + bytes(name, 'utf8')),
+            ctypes.c_char_p(b'\\\\'+bytes(server, 'utf-8')+'\\pipe\\' + bytes(name, 'utf8')),
             ctypes.c_uint(GENERIC_READ | GENERIC_WRITE),
             0,                      # no sharing
             0,                      # default security
